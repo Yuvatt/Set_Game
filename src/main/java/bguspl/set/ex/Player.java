@@ -119,15 +119,14 @@ public class Player implements Runnable {
                 try {
                     synchronized (this) {
                         int currentSlot = actions.take();
+                        synchronized (table.slotLock[currentSlot]) {
                         if (table.slotToCard[currentSlot] != null) {
                             if (hasToken(currentSlot) >= 0) {
                                 tokens[hasToken(currentSlot)] = -1; // update the tokens array
                                 table.removeToken(id, currentSlot);
                                 tokenCounter--;
 
-                            }
-
-                            else if (tokenCounter < env.config.featureSize) {
+                            } else if (tokenCounter < env.config.featureSize) {
                                 table.placeToken(id, currentSlot);
                                 tokenCounter++;
 
@@ -142,17 +141,21 @@ public class Player implements Runnable {
 
                                 // checkMe
                                 if (tokenCounter == env.config.featureSize) {
-                                   
+                                    synchronized (playerKey){
                                         checkMe = true;
-                                        while (checkMe) {
-                                            try {
-                                                wait();
-                                            } catch (InterruptedException e) {
-                                            }
+                                        try {
+                                            while (checkMe)
+                                                playerKey.wait();
                                         }
+                                        catch (InterruptedException e) {}
+                                        synchronized (dealer) {
+                                            dealer.notifyAll();
+                                        }
+                                    }
                                 }
                             }
                         }
+                    }
                     }
                 } catch (InterruptedException e) {
                 }
@@ -213,10 +216,10 @@ public class Player implements Runnable {
      */
     public void keyPressed(int slot) {
         if (freezeTime == -1) {
-            synchronized (this) {
+            synchronized (playerKey) {
                 try {
                     while (dealer.isWorking)
-                        wait();
+                        playerKey.wait();
                     actions.put(slot);
                 } catch (InterruptedException e) {
                 }
@@ -268,22 +271,22 @@ public class Player implements Runnable {
     }
 
     public void setFreezeTime() {
-        if (freezeTime != -1) {
-            for (long t = freezeTime; t > 0 && !terminate; t -= 1000) {
-                try {
-                    env.ui.setFreeze(this.id, t);
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    env.logger.info("thread " + Thread.currentThread().getName() + " interrupted");
-                    this.terminate();
+            if (freezeTime != -1) {
+                for (long t = freezeTime; t > 0 && !terminate; t -= 1000) {
+                    try {
+                        env.ui.setFreeze(this.id, t);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        env.logger.info("thread " + Thread.currentThread().getName() + " interrupted");
+                        this.terminate();
+                    }
                 }
+                if (!terminate) {
+                    freezeTime = 0;
+                    env.ui.setFreeze(id, freezeTime);
+                }
+                freezeTime = -1;
             }
-            if (!terminate) {
-                freezeTime = 0;
-                env.ui.setFreeze(id, freezeTime);
-            }
-            freezeTime = -1;
-        }
     }
 
     public boolean isHuman() {

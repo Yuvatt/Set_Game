@@ -124,8 +124,10 @@ public class Table {
      * @param slot   - the slot on which to place the token.
      */
     public void placeToken(int player, int slot) {
-        if(slotToCard[slot] != null)
-            env.ui.placeToken(player, slot);
+        synchronized(slotLock[slot]) {
+            if (slotToCard[slot] != null)
+                env.ui.placeToken(player, slot);
+        }
     }
     /**
      * Removes a token of a player from a grid slot.
@@ -134,7 +136,9 @@ public class Table {
      * @return       - true iff a token was successfully removed.
      */
     public boolean removeToken(int player, int slot) {
-        env.ui.removeToken(player, slot);
-        return true;
+        synchronized(slotLock[slot]) {
+            env.ui.removeToken(player, slot);
+            return true;
+        }
     }
 }

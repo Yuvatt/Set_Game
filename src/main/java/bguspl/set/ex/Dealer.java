@@ -148,8 +148,8 @@ public class Dealer implements Runnable {
                     }
                 }
                 players[i].checkMe = false;
-                synchronized(players[i]){
-                    players[i].notifyAll();
+                synchronized(players[i].playerKey){
+                    players[i].playerKey.notify();
                 }
         }
     }
@@ -160,7 +160,6 @@ public class Dealer implements Runnable {
     private void placeCardsOnTable() {
 
             isWorking = true;
-            synchronized(table){
             for (int slot = 0; slot < env.config.tableSize && deck.size() > 0; slot++) {
                 if (table.slotToCard[slot] == null) {
                     int randomIndex = randomCard();
@@ -170,8 +169,6 @@ public class Dealer implements Runnable {
                 }
             }
             isWorking = false;
-            table.notifyAll();
-        }
     }
     
 
@@ -182,7 +179,7 @@ public class Dealer implements Runnable {
     private void sleepUntilWokenOrTimeout() {
         synchronized (this) {
             try {
-                wait(100);
+                wait(10);
             } catch (InterruptedException e) {
             }
         }
@@ -209,18 +206,15 @@ public class Dealer implements Runnable {
      */
     private void removeAllCardsFromTable() { 
         isWorking = true;
-        synchronized (table) {
-            env.ui.removeTokens();
-            resetTokens();
-            for (int slot = 0; slot < env.config.tableSize; slot++) {
-                if (table.slotToCard[slot] != null) {
+        env.ui.removeTokens();
+        resetTokens();
+        for (int slot = 0; slot < env.config.tableSize; slot++) {
+            if (table.slotToCard[slot] != null) {
                     deck.add(table.slotToCard[slot]);
                     table.removeCard(slot);
-                }
             }
-            isWorking = false;
-            table.notifyAll();
         }
+        isWorking = false;
     }
 
     /**
