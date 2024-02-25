@@ -215,7 +215,7 @@ public class Player implements Runnable {
      * @param slot - the slot corresponding to the key pressed.
      */
     public void keyPressed(int slot) {
-        if (freezeTime == -1) {
+        if (freezeTime == -1 && table.slotToCard[slot] != null) {
             synchronized (playerKey) {
                 try {
                     while (dealer.isWorking)
