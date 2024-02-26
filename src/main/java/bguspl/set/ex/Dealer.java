@@ -130,23 +130,21 @@ public class Dealer implements Runnable {
                 if (players[i].checkMe && players[i].tokenCounter == env.config.featureSize) { 
                     int[] tokens = players[i].tokens;
                     int[] cards = slotToCard(players[i].tokens);
+
                     if (env.util.testSet(cards)) {
                         for (int j = 0; j < tokens.length; j++) {
-                            int cardToRemove = tokens[j];
-                            removeOtherTokens(cardToRemove); // removing mine and other's tokens from the card
-                            table.removeCard(cardToRemove);
+                            synchronized(table.slotLock[j]){
+                                int cardToRemove = tokens[j];
+                                removeOtherTokens(cardToRemove); // removing mine and other's tokens from the card
+                                table.removeCard(cardToRemove);
+                            }
                         }
-                        Player p = players[i];
-                        p.point();
-                        // Thread point = new Thread(()-> {p.point();});
-                        // point.start();
-                        // updateTimerDisplay(true);
+                        players[i].point();
+                        updateTimerDisplay(true);
                     }
                      else {
-                         Player p = players[i];
-                         p.penalty();
-                    //     Thread penalty = new Thread(()-> {p.penalty();});
-                    //     penalty.start();
+                         players[i].penalty();
+                    
                      }
                 }
                 players[i].checkMe = false;

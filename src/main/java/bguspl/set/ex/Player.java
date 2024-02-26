@@ -148,8 +148,8 @@ public class Player implements Runnable {
                         while (actions.size() == env.config.featureSize) {
                             wait();
                         }
-                    } catch (InterruptedException e) {
-                    }
+                    } catch (InterruptedException e) {}
+
                     Random key = new Random();
                     int slot = key.nextInt(env.config.tableSize);
                     keyPressed(slot);
@@ -177,17 +177,21 @@ public class Player implements Runnable {
      * @param slot - the slot corresponding to the key pressed.
      */
     public void keyPressed(int slot) {
-        if (freezeTime == -1 && table.slotToCard[slot] != null) {
-            synchronized (playerKey) {
-                try {
-                    while (dealer.isWorking)
-                        playerKey.wait();
-                    actions.put(slot);
+        synchronized (playerKey) {
+        try {
+        if (freezeTime == -1 && table.slotToCard[slot] != null && !dealer.isWorking) 
+                actions.put(slot);
+        else 
+            playerKey.wait();
+        
+                //while (dealer.isWorking)
+                        //playerKey.wait();
+                    
                 } catch (InterruptedException e) {
                 }
             }
         }
-    }
+    
 
     /**
      * Award a point to a player and perform other related actions.
@@ -202,7 +206,6 @@ public class Player implements Runnable {
         env.ui.setScore(id, score);
         env.ui.setFreeze(id, env.config.pointFreezeMillis);
         freezeTime = env.config.pointFreezeMillis;
-        // setFreezeTime();
     }
 
     /**
@@ -211,8 +214,6 @@ public class Player implements Runnable {
     public void penalty() {
         env.ui.setFreeze(id, env.config.penaltyFreezeMillis);
         freezeTime = env.config.penaltyFreezeMillis;
-        // setFreezeTime();
-
     }
 
     // get Score
@@ -276,8 +277,10 @@ public class Player implements Runnable {
     }
 
     private void placeToken(int slot) {
-        table.placeToken(id, slot);
-        tokenCounter++;
+        synchronized(table.slotLock[slot]){
+            table.placeToken(id, slot);
+            tokenCounter++;
+        }
 
         // update the tokens array
         boolean bool = false;
