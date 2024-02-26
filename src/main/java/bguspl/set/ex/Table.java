@@ -95,11 +95,11 @@ public class Table {
             Thread.sleep(env.config.tableDelayMillis);
         } catch (InterruptedException ignored) {}
 
-        synchronized(slotLock[slot]){
+        //synchronized(slotLock[slot]){
         cardToSlot[card] = slot;
         slotToCard[slot] = card;
         env.ui.placeCard(card, slot);
-        }
+        //}
     }
 
     /**
@@ -111,11 +111,11 @@ public class Table {
             Thread.sleep(env.config.tableDelayMillis);
         } catch (InterruptedException ignored) {}
 
-        synchronized(slotLock[slot]){
+        //synchronized(slotLock[slot]){
         cardToSlot[slotToCard[slot]] = null;
         slotToCard[slot] = null;
         env.ui.removeCard(slot);
-        }
+        //}
     }
 
     /**

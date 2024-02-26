@@ -119,7 +119,6 @@ public class Player implements Runnable {
                 try {
                     synchronized (this) {
                         int currentSlot = actions.take();
-                        synchronized (table.slotLock[currentSlot]) {
                         if (table.slotToCard[currentSlot] != null) {
                             if (hasToken(currentSlot) >= 0) {
                                 tokens[hasToken(currentSlot)] = -1; // update the tokens array
@@ -155,7 +154,6 @@ public class Player implements Runnable {
                                 }
                             }
                         }
-                    }
                     }
                 } catch (InterruptedException e) {
                 }
