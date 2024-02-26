@@ -70,6 +70,8 @@ public class Player implements Runnable {
 
     public long freezeTime = -1;
 
+    public long sleepEnd;
+
     public LinkedBlockingQueue<Integer> actions;
 
     public Object playerKey;
@@ -115,48 +117,10 @@ public class Player implements Runnable {
 
         while (!terminate) {
 
-            while (!actions.isEmpty() && freezeTime == -1 && !dealer.isWorking) {
-                try {
-                    synchronized (this) {
-                        int currentSlot = actions.take();
-                        if (table.slotToCard[currentSlot] != null) {
-                            if (hasToken(currentSlot) >= 0) {
-                                tokens[hasToken(currentSlot)] = -1; // update the tokens array
-                                table.removeToken(id, currentSlot);
-                                tokenCounter--;
-
-                            } else if (tokenCounter < env.config.featureSize) {
-                                table.placeToken(id, currentSlot);
-                                tokenCounter++;
-
-                                // update the tokens array
-                                boolean bool = false;
-                                for (int i = 0; i < tokens.length && !bool; i++) {
-                                    if (tokens[i] == -1) {
-                                        tokens[i] = currentSlot;
-                                        bool = true;
-                                    }
-                                }
-
-                                // checkMe
-                                if (tokenCounter == env.config.featureSize) {
-                                    synchronized (playerKey){
-                                        checkMe = true;
-                                        try {
-                                            while (checkMe)
-                                                playerKey.wait();
-                                        }
-                                        catch (InterruptedException e) {}
-                                        synchronized (dealer) {
-                                            dealer.notifyAll();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } catch (InterruptedException e) {
-                }
+            if (freezeTime >= 0) {
+                setFreezeTime();
+            } else {
+                play();
             }
         }
 
@@ -238,7 +202,7 @@ public class Player implements Runnable {
         env.ui.setScore(id, score);
         env.ui.setFreeze(id, env.config.pointFreezeMillis);
         freezeTime = env.config.pointFreezeMillis;
-        setFreezeTime();
+        // setFreezeTime();
     }
 
     /**
@@ -247,7 +211,7 @@ public class Player implements Runnable {
     public void penalty() {
         env.ui.setFreeze(id, env.config.penaltyFreezeMillis);
         freezeTime = env.config.penaltyFreezeMillis;
-        setFreezeTime();
+        // setFreezeTime();
 
     }
 
@@ -255,6 +219,7 @@ public class Player implements Runnable {
     public int score() {
         return score;
     }
+    // -----------------------------our functions ----------------------------
 
     /**
      * return the index in tokensArray if there is a token on slot
@@ -269,25 +234,75 @@ public class Player implements Runnable {
     }
 
     public void setFreezeTime() {
-            if (freezeTime != -1) {
-                for (long t = freezeTime; t > 0 && !terminate; t -= 1000) {
-                    try {
-                        env.ui.setFreeze(this.id, t);
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        env.logger.info("thread " + Thread.currentThread().getName() + " interrupted");
-                        this.terminate();
-                    }
+        if (freezeTime != -1) {
+            for (long t = freezeTime; t > 0 && !terminate; t -= 1000) {
+                try {
+                    env.ui.setFreeze(this.id, t);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    env.logger.info("thread " + Thread.currentThread().getName() + " interrupted");
+                    this.terminate();
                 }
-                if (!terminate) {
-                    freezeTime = 0;
-                    env.ui.setFreeze(id, freezeTime);
-                }
-                freezeTime = -1;
             }
+            if (!terminate) {
+                freezeTime = 0;
+                env.ui.setFreeze(id, freezeTime);
+            }
+            freezeTime = -1;
+        }
     }
 
     public boolean isHuman() {
         return human;
+    }
+
+    public synchronized void play() {
+        while (!actions.isEmpty() && freezeTime == -1 && !dealer.isWorking) {
+            try {
+                int currentSlot = actions.take();
+                // has a token on slot
+                if (table.slotToCard[currentSlot] != null && hasToken(currentSlot) >= 0) {
+                    tokens[hasToken(currentSlot)] = -1; // update the tokens array
+                    table.removeToken(id, currentSlot);
+                    tokenCounter--;
+
+                    // doenst have a token on slot
+                } else if (table.slotToCard[currentSlot] != null && tokenCounter < env.config.featureSize)
+                    placeToken(currentSlot);
+
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    private void placeToken(int slot) {
+        table.placeToken(id, slot);
+        tokenCounter++;
+
+        // update the tokens array
+        boolean bool = false;
+        for (int i = 0; i < tokens.length && !bool; i++) {
+            if (tokens[i] == -1) {
+                tokens[i] = slot;
+                bool = true;
+
+            }
+        }
+
+        // checkMe
+        if (tokenCounter == env.config.featureSize) {
+            synchronized (playerKey) {
+                checkMe = true;
+                try {
+                    while (checkMe)
+                        playerKey.wait();
+                } catch (InterruptedException e) {
+                }
+                synchronized (dealer) {
+                    dealer.notifyAll();
+
+                }
+            }
+        }
     }
 }

@@ -13,6 +13,33 @@ with a short description of:
 1. Fully supporting all configuration fields and avoiding the use of magic numbers
 
 We are not entitled to this bonus.
+1. Instead of hardcoding numerical values, we opted to utilize configuration fields
+whenever size or time-related parameters were required.
+
+2. we used it in every class.
+Table:
+instractor
+placeCard
+removeCard
+
+Dealer:
+instractor
+timerLoop
+removeCardsFromTable
+placeCardsOnTable
+updateTimerDisplay
+removeAllCardsFromTable
+slotToCard
+
+Player:
+instractor
+run
+createArtificialIntelligence
+point
+penalty
+
+3. We verified this by modifying the provided configuration data
+and checking if the functionality remained intact.
 
 --------------------
 

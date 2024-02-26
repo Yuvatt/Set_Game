@@ -137,15 +137,17 @@ public class Dealer implements Runnable {
                             table.removeCard(cardToRemove);
                         }
                         Player p = players[i];
-                        Thread point = new Thread(()-> {p.point();});
-                        point.start();
-                        updateTimerDisplay(true);
+                        p.point();
+                        // Thread point = new Thread(()-> {p.point();});
+                        // point.start();
+                        // updateTimerDisplay(true);
                     }
-                    else {
-                        Player p = players[i];
-                        Thread penalty = new Thread(()-> {p.penalty();});
-                        penalty.start();
-                    }
+                     else {
+                         Player p = players[i];
+                         p.penalty();
+                    //     Thread penalty = new Thread(()-> {p.penalty();});
+                    //     penalty.start();
+                     }
                 }
                 players[i].checkMe = false;
                 synchronized(players[i].playerKey){
@@ -179,7 +181,7 @@ public class Dealer implements Runnable {
     private void sleepUntilWokenOrTimeout() {
         synchronized (this) {
             try {
-                wait(10);
+                wait(100);
             } catch (InterruptedException e) {
             }
         }
