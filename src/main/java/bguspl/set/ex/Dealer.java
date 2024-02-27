@@ -2,6 +2,7 @@ package bguspl.set.ex;
 
 import bguspl.set.Env;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -43,9 +44,11 @@ public class Dealer implements Runnable {
 
     public volatile boolean isWorking = false;
 
-    // keys
-
     public static Object dealerKey;
+
+    public boolean haveTimer;
+
+    long timePass = 0;
 
     public Dealer(Env env, Table table, Player[] players) {
         this.env = env;
@@ -53,6 +56,7 @@ public class Dealer implements Runnable {
         this.players = players;
         deck = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
         dealerKey = new Object();
+        haveTimer = env.config.turnTimeoutMillis > 0;
     }
 
     /**
@@ -79,12 +83,17 @@ public class Dealer implements Runnable {
         while (!shouldFinish()) {
             placeCardsOnTable();
             updateTimerDisplay(true);
-            timerLoop();
+            if (haveTimer) {
+                timerLoop();
+                
+            } else
+                noTimerLoop();
+                
             removeAllCardsFromTable();
         }
         announceWinners();
         terminate();
-        Thread.currentThread().interrupt(); 
+        Thread.currentThread().interrupt();
         env.logger.info("thread " + Thread.currentThread().getName() + " terminated.");
     }
 
@@ -103,12 +112,32 @@ public class Dealer implements Runnable {
         }
     }
 
+    private void noTimerLoop() {
+        while (!terminate && !shuffle()) {
+            sleepUntilWokenOrTimeout();
+            updateTimerDisplay(false);
+            removeCardsFromTable();
+            placeCardsOnTable();
+        }
+
+    }
+
+    // return true if have no sets
+    private boolean shuffle() {
+        List<Integer> cards = new LinkedList<>();
+        for (int i = 0; i < env.config.tableSize; i++) {
+            if (table.slotToCard[i] != null)
+                cards.add(this.table.slotToCard[i]);
+        }
+        return env.util.findSets(cards, 1).size() == 0;
+    }
+
     /**
      * Called when the game should be terminated.
      */
     public void terminate() {
         terminate = true;
-        for (int i = players.length -1 ; i >=0; i--) {
+        for (int i = players.length - 1; i >= 0; i--) {
             players[i].terminate();
             players[i].playerThread.interrupt();
         }
@@ -127,35 +156,34 @@ public class Dealer implements Runnable {
      * Checks cards should be removed from the table and removes them.
      */
     private void removeCardsFromTable() {
-            
-            for (int i = 0; i < players.length; i++) {
-                if (players[i].checkMe && players[i].tokenCounter == env.config.featureSize) { 
-                    int[] tokens = players[i].tokens;
-                    int[] cards = slotToCard(players[i].tokens);
-                    
-                    if (env.util.testSet(cards)) {   
-                        env.logger.info("PLAYER " + players[i].id + " HAS A SET");
-                        for (int j = 0; j < tokens.length; j++) {
-                            synchronized(table.slotLock[j]){
-                                int cardToRemove = tokens[j];
-                                removeOtherTokens(cardToRemove); // removing mine and other's tokens from the card
-                                table.removeCard(cardToRemove);
-                            }
-                        }
-                        // removeOtherTokens(tokens);
-                        players[i].point();
-                        updateTimerDisplay(true);
 
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].checkMe && players[i].tokenCounter == env.config.featureSize) {
+                int[] tokens = players[i].tokens;
+                int[] cards = slotToCard(players[i].tokens);
+
+                if (env.util.testSet(cards)) {
+                    env.logger.info("PLAYER " + players[i].id + " HAS A SET");
+                    for (int j = 0; j < tokens.length; j++) {
+                        synchronized (table.slotLock[j]) {
+                            int cardToRemove = tokens[j];
+                            removeOtherTokens(cardToRemove); // removing mine and other's tokens from the card
+                            table.removeCard(cardToRemove);
+                        }
                     }
-                     else {
-                         players[i].penalty();
-                    
-                     }
+                    // removeOtherTokens(tokens);
+                    players[i].point();
+                    updateTimerDisplay(true);
+
+                } else {
+                    players[i].penalty();
+
                 }
-                players[i].checkMe = false;
-                synchronized(players[i].playerKey){
-                    players[i].playerKey.notify();
-                }
+            }
+            players[i].checkMe = false;
+            synchronized (players[i].playerKey) {
+                players[i].playerKey.notify();
+            }
         }
     }
 
@@ -164,18 +192,17 @@ public class Dealer implements Runnable {
      */
     private void placeCardsOnTable() {
 
-            isWorking = true;
-            for (int slot = 0; slot < env.config.tableSize && deck.size() > 0; slot++) {
-                if (table.slotToCard[slot] == null) {
-                    int randomIndex = randomCard();
-                    int card = deck.get(randomIndex);
-                    table.placeCard(card, slot);
-                    deck.remove(randomIndex);
-                }
+        isWorking = true;
+        for (int slot = 0; slot < env.config.tableSize && deck.size() > 0; slot++) {
+            if (table.slotToCard[slot] == null) {
+                int randomIndex = randomCard();
+                int card = deck.get(randomIndex);
+                table.placeCard(card, slot);
+                deck.remove(randomIndex);
             }
-            isWorking = false;
+        }
+        isWorking = false;
     }
-    
 
     /**
      * Sleep for a fixed amount of time or until the thread is awakened for some
@@ -194,29 +221,45 @@ public class Dealer implements Runnable {
      * Reset and/or update the countdown and the countdown display.
      */
     private void updateTimerDisplay(boolean reset) {
-        if (reset) {
-            env.ui.setCountdown(env.config.turnTimeoutMillis, false);
-            reshuffleTime = System.currentTimeMillis() + env.config.turnTimeoutMillis + 1000;
-        } else {
-            long clockTime = reshuffleTime - System.currentTimeMillis();
-            if(clockTime < 0)
-                env.ui.setCountdown(0, true);
-            else
-                env.ui.setCountdown(clockTime, clockTime <= env.config.turnTimeoutWarningMillis);
+
+        if (env.config.turnTimeoutMillis > 0) {
+            if (reset) {
+                env.ui.setCountdown(env.config.turnTimeoutMillis, false);
+                reshuffleTime = System.currentTimeMillis() + env.config.turnTimeoutMillis + 1000;
+            } else {
+
+                long clockTime = reshuffleTime - System.currentTimeMillis();
+                if (clockTime < 0)
+                    env.ui.setCountdown(0, true);
+                else
+                    env.ui.setCountdown(clockTime, clockTime <= env.config.turnTimeoutWarningMillis);
+            }
+
+        } else if (env.config.turnTimeoutMillis == 0) {
+            
+            if(reset){
+                env.ui.setElapsed(0);
+                timePass = System.currentTimeMillis();
+            }
+            else {
+                long time = System.currentTimeMillis()- timePass;
+                env.ui.setElapsed(time);
+            }
         }
+
     }
 
     /**
      * Returns all the cards from the table to the deck.
      */
-    private void removeAllCardsFromTable() { 
+    private void removeAllCardsFromTable() {
         isWorking = true;
         env.ui.removeTokens();
         resetTokens();
         for (int slot = 0; slot < env.config.tableSize; slot++) {
             if (table.slotToCard[slot] != null) {
-                    deck.add(table.slotToCard[slot]);
-                    table.removeCard(slot);
+                deck.add(table.slotToCard[slot]);
+                table.removeCard(slot);
             }
         }
         isWorking = false;
@@ -261,30 +304,30 @@ public class Dealer implements Runnable {
         for (Player p : players) {
             p.actions.clear();
             p.tokenCounter = 0;
-            for (int i = 0; i< p.tokens.length; i++) {
-                p.tokens[i] = -1;  
+            for (int i = 0; i < p.tokens.length; i++) {
+                p.tokens[i] = -1;
             }
         }
     }
 
     private void removeOtherTokens(int slot) {
-        synchronized(table.slotLock[slot]){
-        for (Player p : players) {
-            for (int i = 0; i < p.tokens.length; i++) {
-                if (p.tokens[i] == slot) {
-                    p.tokenCounter--;
-                    p.tokens[i] = -1;
-                    env.ui.removeToken(p.id, slot);
+        synchronized (table.slotLock[slot]) {
+            for (Player p : players) {
+                for (int i = 0; i < p.tokens.length; i++) {
+                    if (p.tokens[i] == slot) {
+                        p.tokenCounter--;
+                        p.tokens[i] = -1;
+                        env.ui.removeToken(p.id, slot);
+                    }
                 }
             }
-        }
         }
     }
 
     private int[] slotToCard(int[] slots) {
         int[] cards = new int[env.config.featureSize];
         for (int i = 0; i < slots.length; i++) {
-            if(table.slotToCard[slots[i]] == null)
+            if (table.slotToCard[slots[i]] == null)
                 Thread.currentThread().interrupt();
             else
                 cards[i] = table.slotToCard[slots[i]];
@@ -294,16 +337,16 @@ public class Dealer implements Runnable {
 
     // private void removeOtherTokens (int[] slots){
 
-    //     for (int i = 0; i < slots.length; i++) {
-    //         for (int j = 0; j < players.length; j++) {
-    //             if(players[j].hasToken(slots[i]) >= 0){
-    //                 table.removeToken(players[j].id, slots[i]);
-    //                 players[j].tokens[players[j].hasToken(slots[i])] = -1;
-    //                 players[j].tokenCounter--;
-    //             }
-                
-    //         }
-    //     }
+    // for (int i = 0; i < slots.length; i++) {
+    // for (int j = 0; j < players.length; j++) {
+    // if(players[j].hasToken(slots[i]) >= 0){
+    // table.removeToken(players[j].id, slots[i]);
+    // players[j].tokens[players[j].hasToken(slots[i])] = -1;
+    // players[j].tokenCounter--;
+    // }
+
+    // }
+    // }
     // }
 
 }
