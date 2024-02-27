@@ -1,0 +1,28 @@
+[13:12:09.156] [INFO   ] thread main starting.
+[13:12:09.162] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[13:12:09.164] [SEVERE ] configuration file was loaded from resources directory.
+[13:12:10.186] [INFO   ] thread dealer starting.
+[13:12:10.186] [INFO   ] thread dealer starting.
+[13:12:10.186] [INFO   ] thread player0 starting.
+[13:12:10.187] [INFO   ] thread player1 starting.
+[13:12:10.187] [INFO   ] thread computer-1 starting.
+[13:12:10.187] [INFO   ] thread player2 starting.
+[13:12:10.188] [INFO   ] thread computer-2 starting.
+[13:12:10.188] [INFO   ] thread player3 starting.
+[13:12:10.188] [INFO   ] thread computer-3 starting.
+[13:12:10.189] [INFO   ] thread player4 starting.
+[13:12:10.189] [INFO   ] thread computer-4 starting.
+[13:12:10.189] [INFO   ] thread player5 starting.
+[13:12:10.190] [INFO   ] thread computer-5 starting.
+[13:12:10.190] [INFO   ] thread player6 starting.
+[13:12:10.190] [INFO   ] thread computer-6 starting.
+[13:12:10.190] [INFO   ] thread player7 starting.
+[13:12:10.190] [INFO   ] thread computer-7 starting.
+[13:12:10.191] [INFO   ] thread player8 starting.
+[13:12:10.191] [INFO   ] thread computer-8 starting.
+[13:12:10.191] [INFO   ] thread player9 starting.
+[13:12:10.192] [INFO   ] thread computer-9 starting.
+[13:12:10.192] [INFO   ] thread player10 starting.
+[13:12:10.192] [INFO   ] thread computer-10 starting.
+[13:12:19.130] [SEVERE ] exit button pressed
+[13:12:19.131] [INFO   ] thread player0 terminated.

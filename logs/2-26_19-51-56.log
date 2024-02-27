@@ -1,0 +1,150 @@
+[19:51:56.345] [INFO   ] thread main starting.
+[19:51:56.356] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[19:51:56.358] [SEVERE ] configuration file was loaded from resources directory.
+[19:51:57.553] [INFO   ] thread dealer starting.
+[19:51:57.553] [INFO   ] thread dealer starting.
+[19:51:57.553] [INFO   ] thread player0 starting.
+[19:51:57.554] [INFO   ] thread computer-0 starting.
+[19:51:57.554] [INFO   ] thread player1 starting.
+[19:51:57.554] [INFO   ] thread computer-1 starting.
+[19:51:57.555] [INFO   ] thread player2 starting.
+[19:51:57.555] [INFO   ] thread computer-2 starting.
+[19:51:57.556] [INFO   ] thread player3 starting.
+[19:51:57.556] [INFO   ] thread player4 starting.
+[19:51:57.557] [INFO   ] thread computer-3 starting.
+[19:51:57.564] [INFO   ] thread computer-4 starting.
+[19:51:57.565] [INFO   ] thread player5 starting.
+[19:51:57.566] [INFO   ] thread computer-5 starting.
+[19:51:57.568] [INFO   ] thread player6 starting.
+[19:51:57.576] [INFO   ] thread computer-6 starting.
+[19:51:57.582] [INFO   ] thread player7 starting.
+[19:51:57.588] [INFO   ] thread computer-7 starting.
+[19:51:57.701] [SEVERE ] placing card 30 in slot 0
+[19:51:57.808] [SEVERE ] placing card 20 in slot 1
+[19:51:57.909] [SEVERE ] placing card 47 in slot 2
+[19:51:58.011] [SEVERE ] placing card 73 in slot 3
+[19:51:58.114] [SEVERE ] placing card 28 in slot 4
+[19:51:58.222] [SEVERE ] placing card 38 in slot 5
+[19:51:58.325] [SEVERE ] placing card 17 in slot 6
+[19:51:58.430] [SEVERE ] placing card 57 in slot 7
+[19:51:58.536] [SEVERE ] placing card 75 in slot 8
+[19:51:58.641] [SEVERE ] placing card 67 in slot 9
+[19:51:58.743] [SEVERE ] placing card 60 in slot 10
+[19:51:58.847] [SEVERE ] placing card 50 in slot 11
+[19:51:58.848] [SEVERE ] updating countdown to 10000
+[19:51:58.848] [SEVERE ] player 5 placing token on slot 0
+[19:51:58.848] [SEVERE ] player 4 placing token on slot 1
+[19:51:58.849] [SEVERE ] player 5 placing token on slot 1
+[19:51:58.848] [SEVERE ] player 6 placing token on slot 3
+[19:51:58.848] [SEVERE ] player 7 placing token on slot 1
+[19:51:58.849] [SEVERE ] player 4 placing token on slot 0
+[19:51:58.850] [SEVERE ] removing player 4 token from slot 1
+[19:51:58.849] [SEVERE ] player 1 placing token on slot 0
+[19:51:58.858] [SEVERE ] removing player 1 token from slot 0
+[19:51:58.858] [SEVERE ] player 1 placing token on slot 0
+[19:51:58.849] [SEVERE ] player 2 placing token on slot 1
+[19:51:58.869] [SEVERE ] player 2 placing token on slot 3
+[19:51:58.849] [SEVERE ] player 8 placing token on slot 0
+[19:51:58.872] [SEVERE ] player 8 placing token on slot 1
+[19:51:58.873] [SEVERE ] removing player 8 token from slot 1
+[19:51:58.849] [SEVERE ] player 3 placing token on slot 2
+[19:51:58.849] [SEVERE ] removing player 5 token from slot 1
+[19:51:58.850] [SEVERE ] player 6 placing token on slot 0
+[19:51:58.879] [SEVERE ] player 6 placing token on slot 4
+[19:51:58.851] [SEVERE ] player 7 placing token on slot 0
+[19:51:58.872] [SEVERE ] player 2 placing token on slot 2
+[19:51:58.879] [SEVERE ] player 3 placing token on slot 0
+[19:51:58.883] [SEVERE ] player 3 placing token on slot 3
+[19:51:58.880] [SEVERE ] player 7 placing token on slot 2
+[19:51:58.954] [SEVERE ] updating countdown to 10895
+[19:51:58.955] [SEVERE ] setting player 2 freeze to 0
+[19:51:58.955] [SEVERE ] setting player 3 freeze to 0
+[19:51:58.956] [SEVERE ] setting player 6 freeze to 0
+[19:51:58.956] [SEVERE ] setting player 7 freeze to 0
+[19:51:58.959] [SEVERE ] setting player 3 freeze to 0
+[19:51:58.959] [SEVERE ] setting player 2 freeze to 0
+[19:51:58.959] [SEVERE ] setting player 6 freeze to 0
+[19:51:58.959] [SEVERE ] setting player 7 freeze to 0
+[19:51:58.959] [SEVERE ] updating countdown to 10890
+[19:51:59.073] [SEVERE ] updating countdown to 10776
+[19:51:59.179] [SEVERE ] updating countdown to 10670
+[19:51:59.280] [SEVERE ] updating countdown to 10569
+[19:51:59.381] [SEVERE ] updating countdown to 10468
+[19:51:59.489] [SEVERE ] updating countdown to 10360
+[19:51:59.598] [SEVERE ] updating countdown to 10251
+[19:51:59.701] [SEVERE ] updating countdown to 10148
+[19:51:59.809] [SEVERE ] updating countdown to 10040
+[19:51:59.917] [SEVERE ] updating countdown to 9932
+[19:52:00.021] [SEVERE ] updating countdown to 9828
+[19:52:00.128] [SEVERE ] updating countdown to 9721
+[19:52:00.234] [SEVERE ] updating countdown to 9615
+[19:52:00.339] [SEVERE ] updating countdown to 9510
+[19:52:00.441] [SEVERE ] updating countdown to 9408
+[19:52:00.543] [SEVERE ] updating countdown to 9306
+[19:52:00.650] [SEVERE ] updating countdown to 9199
+[19:52:00.754] [SEVERE ] updating countdown to 9095
+[19:52:00.857] [SEVERE ] updating countdown to 8993
+[19:52:00.962] [SEVERE ] updating countdown to 8887
+[19:52:01.068] [SEVERE ] updating countdown to 8781
+[19:52:01.172] [SEVERE ] updating countdown to 8677
+[19:52:01.277] [SEVERE ] updating countdown to 8572
+[19:52:01.380] [SEVERE ] updating countdown to 8469
+[19:52:01.481] [SEVERE ] updating countdown to 8368
+[19:52:01.593] [SEVERE ] updating countdown to 8256
+[19:52:01.697] [SEVERE ] updating countdown to 8152
+[19:52:01.803] [SEVERE ] updating countdown to 8046
+[19:52:01.906] [SEVERE ] updating countdown to 7943
+[19:52:02.011] [SEVERE ] updating countdown to 7838
+[19:52:02.116] [SEVERE ] updating countdown to 7733
+[19:52:02.228] [SEVERE ] updating countdown to 7624
+[19:52:02.333] [SEVERE ] updating countdown to 7516
+[19:52:02.439] [SEVERE ] updating countdown to 7410
+[19:52:02.545] [SEVERE ] updating countdown to 7304
+[19:52:02.648] [SEVERE ] updating countdown to 7201
+[19:52:02.756] [SEVERE ] updating countdown to 7094
+[19:52:02.861] [SEVERE ] updating countdown to 6989
+[19:52:02.963] [SEVERE ] updating countdown to 6886
+[19:52:03.068] [SEVERE ] updating countdown to 6781
+[19:52:03.177] [SEVERE ] updating countdown to 6672
+[19:52:03.281] [SEVERE ] updating countdown to 6568
+[19:52:03.382] [SEVERE ] updating countdown to 6467
+[19:52:03.486] [SEVERE ] updating countdown to 6363
+[19:52:03.591] [SEVERE ] updating countdown to 6258
+[19:52:03.705] [SEVERE ] updating countdown to 6144
+[19:52:03.805] [SEVERE ] updating countdown to 6044
+[19:52:03.909] [SEVERE ] updating countdown to 5940
+[19:52:04.015] [SEVERE ] updating countdown to 5834
+[19:52:04.128] [SEVERE ] updating countdown to 5721
+[19:52:04.232] [SEVERE ] updating countdown to 5617
+[19:52:04.339] [SEVERE ] updating countdown to 5510
+[19:52:04.441] [SEVERE ] updating countdown to 5408
+[19:52:04.546] [SEVERE ] updating countdown to 5303
+[19:52:04.647] [SEVERE ] updating countdown to 5202
+[19:52:04.752] [SEVERE ] updating countdown to 5097
+[19:52:05.958] [SEVERE ] exit button pressed
+[19:52:05.958] [INFO   ] thread player6 terminated.
+[19:52:05.958] [INFO   ] thread player3 terminated.
+[19:52:05.958] [INFO   ] thread player4 terminated.
+[19:52:05.958] [INFO   ] thread player7 terminated.
+[19:52:05.958] [INFO   ] thread player0 terminated.
+[19:52:05.958] [INFO   ] thread player1 terminated.
+[19:52:05.958] [INFO   ] thread player5 terminated.
+[19:52:05.958] [INFO   ] thread player2 terminated.
+[19:52:06.002] [SEVERE ] removing all tokens
+[19:52:06.106] [SEVERE ] removing card from slot 0
+[19:52:06.211] [SEVERE ] removing card from slot 1
+[19:52:06.313] [SEVERE ] removing card from slot 2
+[19:52:06.418] [SEVERE ] removing card from slot 3
+[19:52:06.520] [SEVERE ] removing card from slot 4
+[19:52:06.625] [SEVERE ] removing card from slot 5
+[19:52:06.727] [SEVERE ] removing card from slot 6
+[19:52:06.830] [SEVERE ] removing card from slot 7
+[19:52:06.935] [SEVERE ] removing card from slot 8
+[19:52:07.037] [SEVERE ] removing card from slot 9
+[19:52:07.141] [SEVERE ] removing card from slot 10
+[19:52:07.247] [SEVERE ] removing card from slot 11
+[19:52:07.247] [SEVERE ] announcing winner(s): player 8, player 7, player 6, player 5, player 4, player 3, player 2, player 1
+[19:52:07.248] [INFO   ] thread dealer terminated.
+[19:52:07.248] [INFO   ] thread dealer terminated.
+[19:52:07.248] [SEVERE ] thanks for playing... it was fun!
+[19:52:07.248] [INFO   ] thread main terminated.
