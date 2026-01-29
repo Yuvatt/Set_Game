@@ -1,0 +1,113 @@
+[16:17:16.101] [INFO   ] thread main starting.
+[16:17:16.268] [INFO   ] thread dealer starting.
+[16:17:16.268] [INFO   ] thread dealer starting.
+[16:17:16.269] [INFO   ] thread player0 starting.
+[16:17:16.269] [INFO   ] thread player1 starting.
+[16:17:16.377] [SEVERE ] placing card 61 in slot 0
+[16:17:16.482] [SEVERE ] placing card 46 in slot 1
+[16:17:16.584] [SEVERE ] placing card 70 in slot 2
+[16:17:16.689] [SEVERE ] placing card 36 in slot 3
+[16:17:16.794] [SEVERE ] placing card 47 in slot 4
+[16:17:16.899] [SEVERE ] placing card 72 in slot 5
+[16:17:17.004] [SEVERE ] placing card 55 in slot 6
+[16:17:17.109] [SEVERE ] placing card 79 in slot 7
+[16:17:17.215] [SEVERE ] placing card 75 in slot 8
+[16:17:17.320] [SEVERE ] placing card 57 in slot 9
+[16:17:17.425] [SEVERE ] placing card 60 in slot 10
+[16:17:17.530] [SEVERE ] placing card 30 in slot 11
+[16:17:17.531] [SEVERE ] updating countdown to 60000
+[16:17:17.635] [SEVERE ] updating countdown to 60896
+[16:17:17.740] [SEVERE ] updating countdown to 60791
+[16:17:17.845] [SEVERE ] updating countdown to 60686
+[16:17:17.950] [SEVERE ] updating countdown to 60581
+[16:17:18.055] [SEVERE ] updating countdown to 60476
+[16:17:18.160] [SEVERE ] updating countdown to 60371
+[16:17:18.265] [SEVERE ] updating countdown to 60266
+[16:17:18.366] [SEVERE ] updating countdown to 60165
+[16:17:18.467] [SEVERE ] updating countdown to 60064
+[16:17:20.760] [SEVERE ] key 81 was pressed by player 1
+[16:17:20.761] [SEVERE ] player 1 placing token on slot 0
+[16:17:20.875] [SEVERE ] key 87 was pressed by player 1
+[16:17:20.875] [SEVERE ] player 1 placing token on slot 1
+[16:17:21.291] [SEVERE ] key 69 was pressed by player 1
+[16:17:21.291] [SEVERE ] player 1 placing token on slot 2
+[16:17:21.381] [SEVERE ] setting player 1 freeze to 3000
+[16:17:21.381] [SEVERE ] setting player 1 freeze to 3000
+[16:17:22.178] [SEVERE ] key 81 was pressed by player 1
+[16:17:22.310] [SEVERE ] key 87 was pressed by player 1
+[16:17:22.386] [SEVERE ] key 69 was pressed by player 1
+[16:17:22.386] [SEVERE ] setting player 1 freeze to 2000
+[16:17:23.391] [SEVERE ] setting player 1 freeze to 1000
+[16:17:23.501] [SEVERE ] key 69 was pressed by player 1
+[16:17:23.621] [SEVERE ] key 87 was pressed by player 1
+[16:17:23.689] [SEVERE ] key 81 was pressed by player 1
+[16:17:24.397] [SEVERE ] setting player 1 freeze to 0
+[16:17:24.473] [SEVERE ] key 65 was pressed by player 1
+[16:17:24.576] [SEVERE ] key 83 was pressed by player 1
+[16:17:24.720] [SEVERE ] key 68 was pressed by player 1
+[16:17:25.850] [SEVERE ] key 65 was pressed by player 1
+[16:17:25.969] [SEVERE ] key 83 was pressed by player 1
+[16:17:26.101] [SEVERE ] key 68 was pressed by player 1
+[16:17:27.066] [SEVERE ] key 69 was pressed by player 1
+[16:17:27.066] [SEVERE ] removing player 1 token from slot 2
+[16:17:27.308] [SEVERE ] key 87 was pressed by player 1
+[16:17:27.308] [SEVERE ] removing player 1 token from slot 1
+[16:17:27.496] [SEVERE ] key 87 was pressed by player 1
+[16:17:27.496] [SEVERE ] player 1 placing token on slot 1
+[16:17:27.698] [SEVERE ] key 81 was pressed by player 1
+[16:17:27.698] [SEVERE ] removing player 1 token from slot 0
+[16:17:28.040] [SEVERE ] key 65 was pressed by player 1
+[16:17:28.040] [SEVERE ] player 1 placing token on slot 4
+[16:17:28.122] [SEVERE ] key 83 was pressed by player 1
+[16:17:28.122] [SEVERE ] player 1 placing token on slot 5
+[16:17:28.177] [SEVERE ] setting player 1 freeze to 3000
+[16:17:28.177] [SEVERE ] setting player 1 freeze to 3000
+[16:17:28.288] [SEVERE ] key 68 was pressed by player 1
+[16:17:29.182] [SEVERE ] setting player 1 freeze to 2000
+[16:17:29.831] [SEVERE ] key 83 was pressed by player 1
+[16:17:30.187] [SEVERE ] setting player 1 freeze to 1000
+[16:17:31.193] [SEVERE ] setting player 1 freeze to 0
+[16:17:31.486] [SEVERE ] key 83 was pressed by player 1
+[16:17:31.486] [SEVERE ] removing player 1 token from slot 5
+[16:17:31.807] [SEVERE ] key 65 was pressed by player 1
+[16:17:31.807] [SEVERE ] removing player 1 token from slot 4
+[16:17:33.150] [SEVERE ] key 90 was pressed by player 1
+[16:17:33.150] [SEVERE ] player 1 placing token on slot 8
+[16:17:33.458] [SEVERE ] key 88 was pressed by player 1
+[16:17:33.459] [SEVERE ] player 1 placing token on slot 9
+[16:17:33.513] [SEVERE ] setting player 1 freeze to 3000
+[16:17:33.513] [SEVERE ] setting player 1 freeze to 3000
+[16:17:34.519] [SEVERE ] setting player 1 freeze to 2000
+[16:17:35.524] [SEVERE ] setting player 1 freeze to 1000
+[16:17:36.529] [SEVERE ] setting player 1 freeze to 0
+[16:17:36.873] [SEVERE ] key 88 was pressed by player 1
+[16:17:36.874] [SEVERE ] removing player 1 token from slot 9
+[16:17:37.149] [SEVERE ] key 90 was pressed by player 1
+[16:17:37.149] [SEVERE ] removing player 1 token from slot 8
+[16:17:38.045] [SEVERE ] key 69 was pressed by player 1
+[16:17:38.045] [SEVERE ] player 1 placing token on slot 2
+[16:17:38.776] [SEVERE ] key 69 was pressed by player 1
+[16:17:38.776] [SEVERE ] removing player 1 token from slot 2
+[16:17:38.992] [SEVERE ] key 87 was pressed by player 1
+[16:17:38.992] [SEVERE ] removing player 1 token from slot 1
+[16:17:40.716] [SEVERE ] exit button pressed
+[16:17:40.717] [INFO   ] thread player1 terminated.
+[16:17:40.717] [INFO   ] thread player0 terminated.
+[16:17:40.747] [SEVERE ] removing all tokens
+[16:17:40.853] [SEVERE ] removing card from slot 0
+[16:17:40.958] [SEVERE ] removing card from slot 1
+[16:17:41.061] [SEVERE ] removing card from slot 2
+[16:17:41.167] [SEVERE ] removing card from slot 3
+[16:17:41.272] [SEVERE ] removing card from slot 4
+[16:17:41.378] [SEVERE ] removing card from slot 5
+[16:17:41.485] [SEVERE ] removing card from slot 6
+[16:17:41.590] [SEVERE ] removing card from slot 7
+[16:17:41.694] [SEVERE ] removing card from slot 8
+[16:17:41.795] [SEVERE ] removing card from slot 9
+[16:17:41.897] [SEVERE ] removing card from slot 10
+[16:17:42.003] [SEVERE ] removing card from slot 11
+[16:17:42.005] [SEVERE ] announcing winner(s): player 2, player 1
+[16:17:42.006] [INFO   ] thread dealer terminated.
+[16:17:42.006] [INFO   ] thread dealer terminated.
+[16:17:42.006] [SEVERE ] thanks for playing... it was fun!
+[16:17:42.007] [INFO   ] thread main terminated.

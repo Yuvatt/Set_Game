@@ -1,0 +1,48 @@
+[14:50:42.044] [INFO   ] thread main starting.
+[14:50:42.235] [INFO   ] thread dealer starting.
+[14:50:42.235] [INFO   ] thread dealer starting.
+[14:50:42.235] [INFO   ] thread player0 starting.
+[14:50:42.235] [INFO   ] thread player1 starting.
+[14:50:42.340] [SEVERE ] placing card 14 in slot 0
+[14:50:42.444] [SEVERE ] placing card 60 in slot 1
+[14:50:42.549] [SEVERE ] placing card 66 in slot 2
+[14:50:42.654] [SEVERE ] placing card 50 in slot 3
+[14:50:42.757] [SEVERE ] placing card 77 in slot 4
+[14:50:42.862] [SEVERE ] placing card 40 in slot 5
+[14:50:42.967] [SEVERE ] placing card 1 in slot 6
+[14:50:43.072] [SEVERE ] placing card 32 in slot 7
+[14:50:43.178] [SEVERE ] placing card 30 in slot 8
+[14:50:43.283] [SEVERE ] placing card 26 in slot 9
+[14:50:43.388] [SEVERE ] placing card 18 in slot 10
+[14:50:43.493] [SEVERE ] placing card 19 in slot 11
+[14:50:43.493] [SEVERE ] updating countdown to 60000
+[14:50:43.599] [SEVERE ] updating countdown to 60895
+[14:50:43.704] [SEVERE ] updating countdown to 60790
+[14:50:43.809] [SEVERE ] updating countdown to 60685
+[14:50:43.914] [SEVERE ] updating countdown to 60580
+[14:50:44.019] [SEVERE ] updating countdown to 60475
+[14:50:44.124] [SEVERE ] updating countdown to 60370
+[14:50:44.229] [SEVERE ] updating countdown to 60265
+[14:50:44.334] [SEVERE ] updating countdown to 60160
+[14:50:44.440] [SEVERE ] updating countdown to 60054
+[14:50:46.475] [SEVERE ] exit button pressed
+[14:50:46.475] [INFO   ] thread player1 terminated.
+[14:50:46.475] [INFO   ] thread player0 terminated.
+[14:50:46.537] [SEVERE ] removing all tokens
+[14:50:46.642] [SEVERE ] removing card from slot 0
+[14:50:46.748] [SEVERE ] removing card from slot 1
+[14:50:46.852] [SEVERE ] removing card from slot 2
+[14:50:46.958] [SEVERE ] removing card from slot 3
+[14:50:47.063] [SEVERE ] removing card from slot 4
+[14:50:47.169] [SEVERE ] removing card from slot 5
+[14:50:47.269] [SEVERE ] removing card from slot 6
+[14:50:47.371] [SEVERE ] removing card from slot 7
+[14:50:47.472] [SEVERE ] removing card from slot 8
+[14:50:47.577] [SEVERE ] removing card from slot 9
+[14:50:47.682] [SEVERE ] removing card from slot 10
+[14:50:47.787] [SEVERE ] removing card from slot 11
+[14:50:47.788] [SEVERE ] announcing winner(s): player 2, player 1
+[14:50:47.789] [INFO   ] thread dealer terminated.
+[14:50:47.789] [INFO   ] thread dealer terminated.
+[14:50:47.789] [SEVERE ] thanks for playing... it was fun!
+[14:50:47.789] [INFO   ] thread main terminated.

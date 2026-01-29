@@ -3,13 +3,17 @@ package bguspl.set;
 import bguspl.set.ex.Dealer;
 import bguspl.set.ex.Player;
 import bguspl.set.ex.Table;
+import com.formdev.flatlaf.FlatLightLaf; 
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.logging.*;
 
 /**
@@ -37,12 +41,33 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        mainThread = Thread.currentThread();
+        // 1. Initialize modern UI look and feel (FlatLaf)
+        try {
+            com.formdev.flatlaf.FlatDarkLaf.setup();            // Set a global nice font
+            UIManager.put("defaultFont", new Font("Marker Felt", Font.PLAIN, 14));
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize FlatLaf");
+        }
 
-        // create the game environment objects
+        mainThread = Thread.currentThread();
         logger = initLogger();
+
+        // 2. Show the Start Screen (Blocks here until user clicks Start)
+        StartScreen startScreen = new StartScreen();
+        startScreen.setVisible(true);
+
+        Properties userSettings = startScreen.getSettings();
+
+        // Check if user closed the window without starting
+        if (userSettings == null) {
+            System.out.println("User canceled game setup.");
+            return; // Exit program
+        }
+
         ThreadLogger.logStart(logger, Thread.currentThread().getName());
-        Config config = new Config(logger, "config.properties");
+
+        // 3. Create Config using the user's settings
+        Config config = new Config(logger, userSettings);
         Util util = new UtilImpl(config);
 
         Player[] players = new Player[config.players];
@@ -59,18 +84,18 @@ public class Main {
 
         Env env = new Env(logger, config, ui, util);
 
-        // create the game entities
+        // Create the game entities
         Table table = new Table(env);
         dealer = new Dealer(env, table, players);
         for (int i = 0; i < players.length; i++)
             players[i] = new Player(env, dealer, table, i, i < env.config.humanPlayers);
 
-        // start the dealer thread
+        // Start the dealer thread
         ThreadLogger dealerThread = new ThreadLogger(dealer, "dealer", logger);
         dealerThread.startWithLog();
 
         try {
-            // shutdown stuff
+            // Wait for game to end
             dealerThread.joinWithLog();
             if (!xButtonPressed && config.endGamePauseMillies > 0) Thread.sleep(config.endGamePauseMillies);
         } catch (InterruptedException ignored) {
@@ -84,8 +109,7 @@ public class Main {
     }
 
     private static Logger initLogger() {
-
-        //just to make our log file nicer :)
+        // Just to make our log file nicer :)
         SimpleDateFormat format = new SimpleDateFormat("M-d_HH-mm-ss");
         FileHandler handler;
         try {
@@ -107,7 +131,7 @@ public class Main {
     public static void setLoggerLevelAndFormat(Logger logger, Level level, String format) {
         Handler[] handlers = logger.getHandlers();
         if (handlers != null) Arrays.stream(handlers).forEach(h -> h.setFormatter(new SimpleFormatter() {
-            // default format (with timestamp)  = "[%1$tF %1$tT] [%2$-7s] %3$s%n";
+            // Default format (with timestamp)
             @Override
             public synchronized String format(LogRecord lr) {
                 return String.format(format, new Date(lr.getMillis()),

@@ -84,7 +84,7 @@ public class UserInterfaceSwing extends JFrame implements UserInterface {
             timerField = new JLabel(config.turnTimeoutMillis < 0 ? "PLAY" : "GET READY...");
 
             // set fonts and color
-            timerField.setFont(new Font("Serif", Font.BOLD, config.fontSize));
+            timerField.setFont(new Font("Marker Felt", Font.BOLD, config.fontSize));
             timerField.setForeground(Color.BLACK);
 
             add(timerField);
@@ -92,7 +92,7 @@ public class UserInterfaceSwing extends JFrame implements UserInterface {
 
         private void setCountdown(long millies, boolean warn) {
             timerField.setText(generateTime(millies, warn));
-            timerField.setForeground(warn ? Color.RED : Color.BLACK);
+            timerField.setForeground(warn ? Color.RED : Color.WHITE);
         }
 
         private void setElapsed(long millies) {
@@ -222,14 +222,14 @@ public class UserInterfaceSwing extends JFrame implements UserInterface {
             this.playersTable = new JLabel[2][config.players];
             for (int i = 0; i < config.players; i++) {
                 this.playersTable[0][i] = new JLabel(config.playerNames[i]);
-                this.playersTable[0][i].setFont(new Font("Serif", Font.BOLD, config.fontSize));
+                this.playersTable[0][i].setFont(new Font("Marker Felt", Font.BOLD, config.fontSize));
                 this.playersTable[0][i].setHorizontalAlignment(JLabel.CENTER);
                 this.add(playersTable[0][i]);
             }
 
             for (int i = 0; i < config.players; i++) {
                 this.playersTable[1][i] = new JLabel("0");
-                this.playersTable[1][i].setFont(new Font("Serif", Font.PLAIN, config.fontSize));
+                this.playersTable[1][i].setFont(new Font("Marker", Font.PLAIN, config.fontSize));
                 this.playersTable[1][i].setHorizontalAlignment(JLabel.CENTER);
                 this.add(playersTable[1][i]);
             }
@@ -258,7 +258,7 @@ public class UserInterfaceSwing extends JFrame implements UserInterface {
             this.setVisible(false);
 
             this.winnerAnnouncement = new JLabel();
-            this.winnerAnnouncement.setFont(new Font("Serif", Font.BOLD, config.fontSize));
+            this.winnerAnnouncement.setFont(new Font("Marker Felt", Font.BOLD, config.fontSize));
             this.winnerAnnouncement.setHorizontalAlignment(JLabel.CENTER);
             this.winnerAnnouncement.setSize(config.cellWidth, config.cellHeight);
             add(winnerAnnouncement);
